@@ -1,0 +1,50 @@
+[
+  {
+    "url": "https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html",
+    "title": "A Light in the Attic",
+    "price": 51.77,
+    "availability": "In stock (22 available)",
+    "rating": 3,
+    "category": "Poetry",
+    "upc": "a897fe39b1053632",
+    "product_type": "Books",
+    "price_excl_tax": 51.77,
+    "price_incl_tax": 51.77,
+    "tax": 0.00,
+    "num_reviews": 0,
+    "description": "It's hard to imagine a world without A Light in the Attic.",
+    "image_url": "https://books.toscrape.com/media/cache/2c/da/2cdad67c44b002e7ead0cc35693c0e8b.jpg"
+  },
+  {
+    "url": "https://books.toscrape.com/catalogue/tipping-the-velvet_999/index.html",
+    "title": "Tipping the Velvet",
+    "price": 53.74,
+    "availability": "In stock (20 available)",
+    "rating": 1,
+    "category": "Historical Fiction",
+    "upc": "90c0a9e7f4b4d67a",
+    "product_type": "Books",
+    "price_excl_tax": 53.74,
+    "price_incl_tax": 53.74,
+    "tax": 0.00,
+    "num_reviews": 0,
+    "description": "A historical novel set in Victorian England.",
+    "image_url": "https://books.toscrape.com/media/cache/26/0c/260c6ae16bce31c8f8c95daddd9f4a1c.jpg"
+  },
+  {
+    "url": "https://books.toscrape.com/catalogue/soumission_998/index.html",
+    "title": "Soumission",
+    "price": 50.10,
+    "availability": "In stock (20 available)",
+    "rating": 1,
+    "category": "Fiction",
+    "upc": "6957f44c3847a760",
+    "product_type": "Books",
+    "price_excl_tax": 50.10,
+    "price_incl_tax": 50.10,
+    "tax": 0.00,
+    "num_reviews": 0,
+    "description": "A controversial novel about the Islamization of France.",
+    "image_url": "https://books.toscrape.com/media/cache/3e/ef/3eef99c9d9adef34639f510662022830.jpg"
+  }
+]
