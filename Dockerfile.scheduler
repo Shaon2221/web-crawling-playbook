@@ -1,0 +1,33 @@
+# Dockerfile for scheduler service
+FROM python:3.11-slim as builder
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+RUN pip install --user --no-cache-dir -r requirements.txt
+
+# Final stage
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=builder /root/.local /root/.local
+ENV PATH=/root/.local/bin:$PATH
+ENV PYTHONPATH=/app:$PYTHONPATH
+
+COPY src/ ./src/
+COPY scripts/ ./scripts/
+COPY .env.example ./.env
+
+RUN mkdir -p /app/logs
+
+# Run scheduler
+CMD ["python", "scripts/run_scheduler.py"]

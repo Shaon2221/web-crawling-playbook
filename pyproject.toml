@@ -1,0 +1,107 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "books-scraper"
+version = "1.0.0"
+description = "Production-grade web crawler for books.toscrape.com with MongoDB persistence, async HTTP, change detection, and REST API"
+requires-python = ">=3.11"
+authors = [
+    {name = "Your Name", email = "your-email@example.com"}
+]
+license = {text = "MIT"}
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    # Core
+    "pydantic>=2.5.0",
+    "pydantic-settings>=2.1.0",
+    "python-dotenv>=1.0.0",
+    
+    # Async HTTP & Web
+    "httpx>=0.25.0",
+    "beautifulsoup4>=4.12.0",
+    "lxml>=4.9.3",
+    
+    # Database
+    "motor>=3.3.2",
+    "pymongo>=4.6.0",
+    
+    # API & Web Framework
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    
+    # Scheduling
+    "apscheduler>=3.10.4",
+    
+    # Monitoring & Logging
+    "python-json-logger>=2.0.7",
+    
+    # Rate Limiting
+    "slowapi>=0.1.9",
+    "redis>=5.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "httpx-mock>=0.30.0",
+    "testcontainers[mongo]>=3.7.0",
+    "black>=23.11.0",
+    "isort>=5.12.0",
+    "flake8>=6.1.0",
+    "mypy>=1.7.0",
+    "types-requests",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "--cov=src --cov-report=html --cov-report=term-missing"
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+
+[tool.isort]
+profile = "black"
+line_length = 100
+skip_gitignore = true
+
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/__main__.py",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]

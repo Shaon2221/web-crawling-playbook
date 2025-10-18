@@ -1,0 +1,579 @@
+{
+  "info": {
+    "name": "Books Scraper API",
+    "description": "Production-grade REST API for books.toscrape.com crawler with authentication, filtering, and change detection",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health & Status",
+      "item": [
+        {
+          "name": "Health Check (No Auth)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/health",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["health"]
+            },
+            "description": "Check if API is running (no authentication required)"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Books Endpoints",
+      "item": [
+        {
+          "name": "Get All Books (with filters & pagination)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "test-key-123",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/books?category=Fiction&min_price=10&max_price=50&rating=3&sort_by=rating&page=1&limit=10",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "books"],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "Fiction",
+                  "disabled": false
+                },
+                {
+                  "key": "min_price",
+                  "value": "10",
+                  "disabled": false
+                },
+                {
+                  "key": "max_price",
+                  "value": "50",
+                  "disabled": false
+                },
+                {
+                  "key": "rating",
+                  "value": "3",
+                  "disabled": false
+                },
+                {
+                  "key": "sort_by",
+                  "value": "rating",
+                  "disabled": false,
+                  "description": "Options: name, price, rating, reviews"
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Retrieve books with optional filters for category, price range, rating, and sorting. Supports pagination."
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Books (No Filters)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "test-key-123",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/books?page=1&limit=20",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "books"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "20",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Get all books with default pagination (page 1, limit 20)"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Category",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "test-key-123",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/books?category=Poetry&page=1&limit=10",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "books"],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "Poetry",
+                  "disabled": false
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Filter books by category"
+          },
+          "response": []
+        },
+        {
+          "name": "Filter by Price Range",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "test-key-123",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/books?min_price=20&max_price=60&sort_by=price&page=1&limit=10",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "books"],
+              "query": [
+                {
+                  "key": "min_price",
+                  "value": "20",
+                  "disabled": false
+                },
+                {
+                  "key": "max_price",
+                  "value": "60",
+                  "disabled": false
+                },
+                {
+                  "key": "sort_by",
+                  "value": "price",
+                  "disabled": false
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Filter books by price range and sort by price"
+          },
+          "response": []
+        },
+        {
+          "name": "Sort by Rating (Top Rated)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "test-key-123",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/books?sort_by=rating&page=1&limit=10",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "books"],
+              "query": [
+                {
+                  "key": "sort_by",
+                  "value": "rating",
+                  "disabled": false
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Get top-rated books"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Book by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "test-key-123",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/books/507f1f77bcf86cd799439011",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "books", "507f1f77bcf86cd799439011"]
+            },
+            "description": "Get complete details for a specific book by its MongoDB ObjectId"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Changes & Monitoring",
+      "item": [
+        {
+          "name": "Get Recent Changes (Last 24 Hours)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "test-key-123",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/changes?hours=24&page=1&limit=20",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "changes"],
+              "query": [
+                {
+                  "key": "hours",
+                  "value": "24",
+                  "disabled": false,
+                  "description": "Number of hours to look back (1-720)"
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "20",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Get all detected changes from the last 24 hours (price changes, new books, availability updates, etc.)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Changes from Last 7 Days",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "test-key-123",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/changes?hours=168&page=1&limit=50",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "changes"],
+              "query": [
+                {
+                  "key": "hours",
+                  "value": "168",
+                  "disabled": false
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "50",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Get changes from the last 7 days (168 hours)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Changes from Last Hour",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "test-key-123",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/changes?hours=1&page=1&limit=10",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "changes"],
+              "query": [
+                {
+                  "key": "hours",
+                  "value": "1",
+                  "disabled": false
+                },
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Get changes from the last hour"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Authentication Examples",
+      "item": [
+        {
+          "name": "Missing API Key (401 Error)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/books?page=1&limit=10",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "books"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "This request will fail with 401 Unauthorized (missing X-API-Key header)"
+          },
+          "response": []
+        },
+        {
+          "name": "Invalid API Key (403 Error)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "invalid-key-xyz",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/books?page=1&limit=10",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "books"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "This request will fail with 403 Forbidden (invalid X-API-Key)"
+          },
+          "response": []
+        },
+        {
+          "name": "Valid API Key (200 Success)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "test-key-123",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/books?page=1&limit=5",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "books"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "5",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "This request succeeds with valid X-API-Key header"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Rate Limiting Demo",
+      "item": [
+        {
+          "name": "Rate Limit Test (Run Multiple Times)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "X-API-Key",
+                "value": "test-key-123",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8000/api/v1/books?page=1&limit=1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["api", "v1", "books"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "disabled": false
+                },
+                {
+                  "key": "limit",
+                  "value": "1",
+                  "disabled": false
+                }
+              ]
+            },
+            "description": "Run this request multiple times rapidly to test rate limiting. After ~100 requests per hour per API key, you'll get 429 Too Many Requests. Current limit: 100 requests/hour"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Documentation & Testing",
+      "item": [
+        {
+          "name": "API Documentation (Swagger UI)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/docs",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["docs"]
+            },
+            "description": "Interactive API documentation (Swagger UI) - open in browser"
+          },
+          "response": []
+        },
+        {
+          "name": "OpenAPI Schema JSON",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/openapi.json",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8000",
+              "path": ["openapi.json"]
+            },
+            "description": "Raw OpenAPI 3.0 schema in JSON format"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
